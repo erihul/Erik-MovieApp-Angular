@@ -1,0 +1,30 @@
+<div class="movie-card">
+  <img
+    [src]="'https://image.tmdb.org/t/p/w500' + movie.poster"
+    [alt]="movie.title"
+    class="poster"
+  />
+
+  <h3>
+    {{ movie.title }} ({{ movie.year }})
+  </h3>
+
+  <p>⭐ Rating: {{ movie.rating }}</p>
+
+  <p class="genre">{{ movie.genre }}</p>
+
+  <p class="description">
+    {{ movie.description }}
+  </p>
+
+  <p class="director">
+    Director: {{ movie.director }}
+  </p>
+
+  <div class="actions">
+    <button (click)="onFavouriteClick()">❤️ Favourite</button>
+    <button (click)="onWatchListClick()">📌 WatchList</button>
+    <button>More details</button>
+  </div>
+</div>
+
