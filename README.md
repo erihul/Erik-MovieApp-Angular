@@ -1,3 +1,16 @@
+# Erik - MovieApp - Angular
+<br>
+
+### To Run the Project 
+
+1. Get Api Key from https://www.themoviedb.org (need to signup/login)
+
+2. Rename the environment.exaxmple.ts to just environment.ts
+
+3. Replace the placeholder value with your ApiKey
+
+<br><br><br>
+
 # AngularKurs
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.

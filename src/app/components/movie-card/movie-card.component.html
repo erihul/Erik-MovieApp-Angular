@@ -1,30 +1,62 @@
-<div class="movie-card">
+<div class="flex bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
   <img
     [src]="'https://image.tmdb.org/t/p/w500' + movie.poster"
     [alt]="movie.title"
-    class="poster"
+    class="w-28 sm:w-32 md:w-36 object-cover"
   />
 
-  <h3>
-    {{ movie.title }} ({{ movie.year }})
-  </h3>
+  <div class="p-3 flex flex-col justify-between flex-1">
+    <div>
+      <h3 class="text-lg font-semibold text-gray-900 truncate">
+        {{ movie.title }}
+      </h3>
+      <p class="text-sm text-gray-600">{{ movie.year }}</p>
+      <p class="text-sm font-semibold text-indigo-600">
+        ⭐ {{ movie.rating }}
+      </p>
 
-  <p>⭐ Rating: {{ movie.rating }}</p>
+      <p class="text-sm text-gray-700 line-clamp-3 mt-1">
+        {{ movie.description }}
+      </p>
+    </div>
 
-  <p class="genre">{{ movie.genre }}</p>
+    <div class="flex gap-2 mt-2">
+      <button class="flex items-center gap-1 text-sm font-semibold text-red-600 hover:text-red-800"
+       (click)="onFavouriteClick()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
+          viewBox="0 0 20 20">
+          <path
+            d="M3.172 5.172a4 4 0 015.656 0L10
+              6.343l1.172-1.171a4 4 0 115.656 5.656L10
+              18.657l-6.828-6.829a4 4 0 010-5.656z" />
+        </svg>
+        Favourite
+      </button>
 
-  <p class="description">
-    {{ movie.description }}
-  </p>
+      <button class="flex items-center gap-1 text-sm font-semibold text-yellow-500 hover:text-yellow-700"
+        (click)="onWatchListClick()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
+          viewBox="0 0 20 20">
+          <path
+            d="M5 3a2 2 0 00-2
+              2v12l7-5 7 5V5a2 2 0 00-2-2H5z" />
+        </svg>
+        Watchlist
+      </button>
 
-  <p class="director">
-    Director: {{ movie.director }}
-  </p>
+      <button class="flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:text-indigo-800">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
+          viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M10.293 15.707a1 1 0 010-1.414L13.586
+              11H3a1 1 0 110-2h10.586l-3.293-3.293a1 1 0
+              111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0
+              01-1.414 0z"
+            clip-rule="evenodd" />
+        </svg>
+        More Details
+      </button>
 
-  <div class="actions">
-    <button (click)="onFavouriteClick()">❤️ Favourite</button>
-    <button (click)="onWatchListClick()">📌 WatchList</button>
-    <button>More details</button>
+    </div>
   </div>
 </div>
-
