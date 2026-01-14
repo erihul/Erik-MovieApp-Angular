@@ -18,6 +18,16 @@
       <p class="text-sm text-gray-700 line-clamp-3 mt-1">
         {{ movie.description }}
       </p>
+
+      @if (showDetails()) {
+        <div class="mt-2 text-sm text-gray-700">
+          <p><strong>Runtime:</strong> {{ runtime() | duration }} </p>
+        </div>
+      }
+
+      @if (loading()) {
+        <p class="text-sm text-gray-500 mt-2">Loading details…</p>
+      }
     </div>
 
     <div class="flex gap-2 mt-2">
@@ -44,7 +54,8 @@
         Watchlist
       </button>
 
-      <button class="flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:text-indigo-800">
+      <button class="flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:text-indigo-800"
+        (click)="showMoreDetailsClick()">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
           viewBox="0 0 20 20">
           <path fill-rule="evenodd"
