@@ -23,41 +23,50 @@
 
       <section>
         <h2 class="text-lg font-semibold text-gray-800 mb-3">Favourites</h2>
-        <div class="space-y-2">
-          @for (item of favourites(); track item.id) {
-            <div class="flex items-center gap-3 bg-white rounded-md p-2">
-              <img
-                class="w-10 h-14 object-cover rounded"
-                [src]="'https://image.tmdb.org/t/p/w185' + item.poster"
-                [alt]="item.title"
-              />
-              <span class="text-sm text-gray-700 truncate">
-                {{ item.title }}
-              </span>
-            </div>
-          }
-        </div>
+
+        @if (favourites()) {
+          <div class="space-y-2">
+            @for (item of favourites(); track item.id) {
+              <div class="flex items-center gap-3 bg-white rounded-md p-2">
+                <img
+                  class="w-10 h-14 object-cover rounded"
+                  [src]="'https://image.tmdb.org/t/p/w185' + item.poster"
+                  [alt]="item.title"
+                />
+                <span class="text-sm text-gray-700 truncate">
+                  {{ item.title }}
+                </span>
+              </div>
+            } @empty {
+              <p class="text-gray-500 text-sm">No favourites added yet.</p>
+            }
+          </div> 
+        }
       </section>
 
       <section>
         <h2 class="text-lg font-semibold text-gray-800 mb-3">Watchlist</h2>
-        <div class="space-y-2">
-          @for (item of watchList(); track item.id) {
-            <div class="flex items-center gap-3 bg-white rounded-md p-2">
-              <img
+
+        @if (watchList()) {
+          <div class="space-y-2">
+            @for (item of watchList(); track item.id) {
+              <div class="flex items-center gap-3 bg-white rounded-md p-2">
+                <img
                 class="w-10 h-14 object-cover rounded"
                 [src]="'https://image.tmdb.org/t/p/w185' + item.poster"
                 [alt]="item.title"
-              />
-              <span class="text-sm text-gray-700 truncate">
-                {{ item.title }}
-              </span>
+                />
+                <span class="text-sm text-gray-700 truncate">
+                  {{ item.title }}
+                </span>
+              </div>
+            } @empty { 
+              <p class="text-gray-500 text-sm">No Movies to watch yet.</p>
+            }
             </div>
           }
-        </div>
       </section>
 
     </aside>
-
   </div>
 </section>

@@ -5,6 +5,9 @@ export type Movie = {
     rating: number;
     year: number;
     description: string;
+
+    runtime?: number;
+    showDetails?: boolean;
 };
 
 export type SavedMovieItem = {

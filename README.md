@@ -5,9 +5,7 @@
 
 1. Get Api Key from https://www.themoviedb.org (need to signup/login)
 
-2. Rename the environment.exaxmple.ts to just environment.ts
-
-3. Replace the placeholder value with your ApiKey
+2. In environment.ts: replace the placeholder value with your ApiKey
 
 <br><br><br>
 
