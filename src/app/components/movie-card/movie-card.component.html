@@ -1,4 +1,5 @@
-<div class="flex bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
+<div [routerLink]="['/movie', movie.id]"
+  class="relative flex bg-slate-50 shadow-md rounded-lg overflow-hidden transition-all duration-200 cursor-pointer hover:shadow-lg hover:brightness-[0.98]">
   <img
     [src]="'https://image.tmdb.org/t/p/w500' + movie.poster"
     [alt]="movie.title"
@@ -31,43 +32,48 @@
     </div>
 
     <div class="flex gap-2 mt-2">
-      <button class="flex items-center gap-1 text-sm font-semibold text-red-600 hover:text-red-800"
-       (click)="onFavouriteClick()">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
-          viewBox="0 0 20 20">
-          <path
-            d="M3.172 5.172a4 4 0 015.656 0L10
-              6.343l1.172-1.171a4 4 0 115.656 5.656L10
-              18.657l-6.828-6.829a4 4 0 010-5.656z" />
-        </svg>
-        Favourite
-      </button>
+      <div class="flex gap-2 mt-2">
+        <app-movie-action-button
+        label="Favourite"
+        [active]="isFavourite()"
+        [inactiveColor]="'red-600'"
+        [activeColor]="'green-600'"
+        [inactivePath]="'M3 8l7.5 8L21 8H3z'"
+        [activePath]="'M3 8l7.5 8L21 8H3z'"
+        [pillBackgroundInactive]="'text-red-600'"
+        [pillBackgroundActive]="'bg-green-100 text-green-700'"
+        [hoverClassInactive]="'hover:bg-gray-200'"
+        [hoverClassActive]="'hover:bg-green-200'"
+        (clicked)="toggleFavourite()"
+      ></app-movie-action-button>
+      <app-movie-action-button
+        label="Watchlist"
+        [active]="isInWatchlist()"
+        [inactiveColor]="'yellow-500'"
+        [activeColor]="'green-600'"
+        [inactivePath]="'M5 4h14v16l-7-4-7 4V4z'"
+        [activePath]="'M5 4h14v16l-7-4-7 4V4z'"
+        [pillBackgroundInactive]="'text-yellow-600'"
+        [pillBackgroundActive]="'bg-green-100 text-green-700'"
+        [hoverClassInactive]="'hover:bg-gray-200'"
+        [hoverClassActive]="'hover:bg-green-200'"
+        (clicked)="toggleWatchlist()"
+      ></app-movie-action-button>
+      </div> 
+        <button class="flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:text-indigo-800"
+          (click)="showMoreDetailsClick(); $event.stopPropagation()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
+            viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M10.293 15.707a1 1 0 010-1.414L13.586
+                11H3a1 1 0 110-2h10.586l-3.293-3.293a1 1 0
+                111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0
+                01-1.414 0z"
+              clip-rule="evenodd" />
+          </svg>
+          Runtime Details
+        </button>
 
-      <button class="flex items-center gap-1 text-sm font-semibold text-yellow-500 hover:text-yellow-700"
-        (click)="onWatchListClick()">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
-          viewBox="0 0 20 20">
-          <path
-            d="M5 3a2 2 0 00-2
-              2v12l7-5 7 5V5a2 2 0 00-2-2H5z" />
-        </svg>
-        Watchlist
-      </button>
-
-      <button class="flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:text-indigo-800"
-        (click)="showMoreDetailsClick()">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
-          viewBox="0 0 20 20">
-          <path fill-rule="evenodd"
-            d="M10.293 15.707a1 1 0 010-1.414L13.586
-              11H3a1 1 0 110-2h10.586l-3.293-3.293a1 1 0
-              111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0
-              01-1.414 0z"
-            clip-rule="evenodd" />
-        </svg>
-        More Details
-      </button>
-
-    </div>
+      </div>
   </div>
 </div>

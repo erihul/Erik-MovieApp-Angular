@@ -1,0 +1,98 @@
+<section
+  *ngIf="movieDetail() as movie"
+  class="relative h-[60vh] bg-cover bg-center"
+  [style.backgroundImage]="'url(https://image.tmdb.org/t/p/original' + movie.backdrop + ')'">
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="relative z-10 container mx-auto px-4 h-full flex items-end justify-between pb-8">
+    <div class="text-white max-w-3xl">
+      <h1 class="text-4xl font-bold">{{ movie.title }}</h1>
+      <div class="flex gap-4 mt-2 text-sm text-gray-300">
+        <span *ngIf="movie.year">{{ movie.year }}</span>
+        <span *ngIf="movie.runtime">{{ movie.runtime }} min</span>
+        <span *ngIf="movie.rating">{{ movie.rating | number:'1.1-1' }}</span>
+      </div>
+      <div class="mt-2 text-sm">{{ genresString() }}</div>
+      <div class="mt-4 flex gap-3">
+        <button
+          *ngIf="trailerKey()"
+          class="px-4 py-2 bg-white text-black font-semibold rounded">
+          Watch Trailer
+        </button>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3 items-end">
+      <app-movie-action-button
+        label="Favourite"
+        [active]="isFavourite()"
+        [inactiveColor]="'red-400'"
+        [activeColor]="'white'"
+        [inactivePath]="'M3 8l7.5 8L21 8H3z'"
+        [activePath]="'M3 8l7.5 8L21 8H3z'"
+        [pillBackgroundInactive]="'bg-black/40 backdrop-blur-sm text-red-400/80'"
+        [pillBackgroundActive]="'bg-green-600/90'"
+        [hoverClassInactive]="'hover:bg-black/90 hover:text-red-400'"
+        [hoverClassActive]="'hover:bg-green-500'"
+        (clicked)="toggleFavourite()"
+      ></app-movie-action-button>
+      <app-movie-action-button
+        label="Watchlist"
+        [active]="isInWatchlist()"
+        [inactiveColor]="'yellow-300'"
+        [activeColor]="'white'"
+        [inactivePath]="'M5 4h14v16l-7-4-7 4V4z'"
+        [activePath]="'M5 4h14v16l-7-4-7 4V4z'"
+        [pillBackgroundInactive]="'bg-black/40 backdrop-blur-sm text-yellow-300/80'"
+        [pillBackgroundActive]="'bg-green-600/90'"
+        [hoverClassInactive]="'hover:bg-black/90 hover:text-yellow-300'"
+        [hoverClassActive]="'hover:bg-green-500'"
+        (clicked)="toggleWatchlist()"
+      ></app-movie-action-button>
+    </div>
+  </div>
+</section>
+<section *ngIf="movieDetail() as movie" class="container mx-auto px-4 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div>
+      <img
+        class="rounded-lg shadow-lg w-full"
+        [src]="'https://image.tmdb.org/t/p/w500' + movie.poster"
+        [alt]="movie.title"/>
+    </div>
+    <div class="md:col-span-3 space-y-4">
+      <div>
+        <h2 class="text-xl font-semibold mb-1">Overview</h2>
+        <p class="text-gray-700 leading-relaxed">
+          {{ movie.description }}
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+        <p *ngIf="movie.releaseDate">
+          <strong>Release date:</strong> {{ movie.releaseDate }}
+        </p>
+        <p *ngIf="movie.budget">
+          <strong>Budget:</strong>
+          {{ movie.budget | currency:'USD' }}
+        </p>
+        <a
+          *ngIf="movie.homepage"
+          [href]="movie.homepage"
+          target="_blank"
+          class="text-indigo-600 hover:underline">
+          Official website
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<section *ngIf="trailerUrl()" class="container mx-auto px-4 py-8">
+  <h2 class="text-2xl font-semibold mb-4">Trailer</h2>
+  <div class="aspect-video">
+    <iframe
+      class="w-full h-full rounded"
+      [src]="trailerUrl()"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>
+

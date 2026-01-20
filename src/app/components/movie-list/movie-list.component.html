@@ -1,72 +1,21 @@
-<section class="px-4 py-8 container mx-auto">
-  <div class="text-center mb-8">
-    <h1 class="text-4xl font-extrabold text-gray-900">Movies</h1>
-    <p class="text-gray-600 mt-2">Browse top rated films</p>
-  </div>
-
-  <div class="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-8">
-
-    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2">
-      @for (movie of moviesArray(); track movie.id) {
-        <app-movie-card
-          [movie]="movie"
-          (addToFavourites)="onAddToFavourites($event)"
-          (addToWatchList)="onAddToWatchList($event)"
-        ></app-movie-card>
-      }
-    </div>
-
-    <aside
-      class="sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto
-             bg-gray-50 rounded-xl p-4 space-y-6 border"
-    >
-
-      <section>
-        <h2 class="text-lg font-semibold text-gray-800 mb-3">Favourites</h2>
-
-        @if (favourites()) {
-          <div class="space-y-2">
-            @for (item of favourites(); track item.id) {
-              <div class="flex items-center gap-3 bg-white rounded-md p-2">
-                <img
-                  class="w-10 h-14 object-cover rounded"
-                  [src]="'https://image.tmdb.org/t/p/w185' + item.poster"
-                  [alt]="item.title"
-                />
-                <span class="text-sm text-gray-700 truncate">
-                  {{ item.title }}
-                </span>
-              </div>
-            } @empty {
-              <p class="text-gray-500 text-sm">No favourites added yet.</p>
-            }
-          </div> 
-        }
-      </section>
-
-      <section>
-        <h2 class="text-lg font-semibold text-gray-800 mb-3">Watchlist</h2>
-
-        @if (watchList()) {
-          <div class="space-y-2">
-            @for (item of watchList(); track item.id) {
-              <div class="flex items-center gap-3 bg-white rounded-md p-2">
-                <img
-                class="w-10 h-14 object-cover rounded"
-                [src]="'https://image.tmdb.org/t/p/w185' + item.poster"
-                [alt]="item.title"
-                />
-                <span class="text-sm text-gray-700 truncate">
-                  {{ item.title }}
-                </span>
-              </div>
-            } @empty { 
-              <p class="text-gray-500 text-sm">No Movies to watch yet.</p>
-            }
-            </div>
-          }
-      </section>
-
-    </aside>
-  </div>
+<section class="grid gap-6 grid-cols-1 sm:grid-cols-2">
+  @for (movie of moviesArray(); track movie.id) {
+    <app-movie-card
+      [movie]="movie"
+      (addToFavourites)="onAddToFavourites($event)"
+      (addToWatchList)="onAddToWatchList($event)">
+    </app-movie-card>
+  }
 </section>
+<div class="flex justify-center mt-8">
+  <button
+    (click)="loadMovies()"
+    [disabled]="isLoading"
+    class="px-6 py-2 rounded-lg font-semibold transition
+           bg-gray-800 text-gray-200
+           hover:bg-red-800 hover:text-white
+           disabled:opacity-50 disabled:cursor-not-allowed"
+  >
+    {{ isLoading ? 'Loading…' : 'Load more' }}
+  </button>
+</div>
