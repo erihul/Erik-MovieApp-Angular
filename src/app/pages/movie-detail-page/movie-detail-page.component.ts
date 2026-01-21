@@ -34,7 +34,7 @@ export class MovieDetailPageComponent implements OnInit {
     return {
       id: detail.id,
       title: detail.title,
-      poster: detail.poster || '',   // fallback if undefined
+      poster: detail.poster || '',
       year: detail.year || 0,
       rating: detail.rating || 0,
       description: detail.description || '',

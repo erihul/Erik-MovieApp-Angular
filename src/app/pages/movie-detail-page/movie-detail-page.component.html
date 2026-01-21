@@ -15,7 +15,7 @@
       <div class="mt-4 flex gap-3">
         <button
           *ngIf="trailerKey()"
-          class="px-4 py-2 bg-white text-black font-semibold rounded">
+          class="px-4 py-2 text-black font-semibold rounded">
           Watch Trailer
         </button>
       </div>
@@ -60,12 +60,12 @@
     </div>
     <div class="md:col-span-3 space-y-4">
       <div>
-        <h2 class="text-xl font-semibold mb-1">Overview</h2>
-        <p class="text-gray-700 leading-relaxed">
+        <h2 class="text-2xl font-bold mb-2">Overview</h2>
+        <p class="leading-relaxed text-lg">
           {{ movie.description }}
         </p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <p *ngIf="movie.releaseDate">
           <strong>Release date:</strong> {{ movie.releaseDate }}
         </p>
@@ -77,15 +77,15 @@
           *ngIf="movie.homepage"
           [href]="movie.homepage"
           target="_blank"
-          class="text-indigo-600 hover:underline">
+          class="text-indigo-600 text-xl hover:underline">
           Official website
         </a>
       </div>
     </div>
   </div>
 </section>
-<section *ngIf="trailerUrl()" class="container mx-auto px-4 py-8">
-  <h2 class="text-2xl font-semibold mb-4">Trailer</h2>
+<section *ngIf="trailerUrl()" class="container mx-auto px-4 pb-12">
+  <h2 class="text-3xl font-semibold mb-4">Trailer</h2>
   <div class="aspect-video">
     <iframe
       class="w-full h-full rounded"
