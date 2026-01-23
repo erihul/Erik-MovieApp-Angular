@@ -9,15 +9,6 @@ export class MovieGuard implements CanActivate {
     console.log("MovieGuard, ok")
     return true;
   }
-    /* constructor(private router: Router) {}
-      canActivate(route: ActivatedRouteSnapshot): boolean {
-        const id = Number(route.paramMap.get('id'));
-        if (isNaN(id) || id <= 0) {
-          this.router.navigate(['/']);
-          return false;
-        }
-        return true;
-    } */
 }
 
 

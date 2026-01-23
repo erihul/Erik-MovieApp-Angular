@@ -1,12 +1,20 @@
-<header>
-    <router-outlet name="header"></router-outlet>
-</header>
-<main class="flex">
-    <aside class="w-64">
-        <router-outlet name="sidebar"></router-outlet>
-    </aside>
+<div class="flex flex-col h-screen overflow-hidden">
+	<header class="fixed top-0 left-0 right-0 z-50">
+		<router-outlet name="header"></router-outlet>
+	</header>
+	<aside
+		class="fixed top-[70px] left-0 w-16 h-[calc(100vh-70px)]
+			z-40 bg-gray-900 text-gray-400 flex flex-col">
+		<router-outlet name="sidebar"></router-outlet>
+	</aside>
+	<main class="flex-1 pt-[70px] overflow-auto bg-neutral-900">
+		<section>
+		<div class="max-w-screen-2xl mx-auto px-32 py-8">
+			<router-outlet></router-outlet>
+		</div>
+		</section>
+	</main>
+</div>
 
-    <section class="flex-1 p-8">
-        <router-outlet></router-outlet>
-    </section>
-</main>
+
+

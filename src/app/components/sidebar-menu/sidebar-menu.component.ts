@@ -1,6 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule, NgFor, NgClass } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, UrlSegment } from '@angular/router';
+import { filter } from 'rxjs';
 import { MovieCategory } from '../../services/home-state.service';
 import { ButtonModule } from 'primeng/button';
 import { PanelMenuModule } from 'primeng/panelmenu';
@@ -8,26 +9,46 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 @Component({
   selector: 'app-sidebar-menu',
   standalone: true,
-  imports: [ CommonModule, ButtonModule, PanelMenuModule ],
+  imports: [
+    CommonModule,
+    NgFor,
+    NgClass,
+    ButtonModule,
+    PanelMenuModule
+  ],
   templateUrl: './sidebar-menu.component.html',
   styleUrl: './sidebar-menu.component.scss',
 })
-export class SidebarMenuComponent {
-    categories: { label: string; value: MovieCategory }[] = [
-        { label: 'Now Playing', value: 'now_playing' },
-        { label: 'Popular', value: 'popular' },
-        { label: 'Top Rated', value: 'top_rated' },
-        { label: 'Upcoming', value: 'upcoming' },
-    ];
+export class SidebarMenuComponent implements OnInit {
+	categories: { label: string; value: MovieCategory }[] = [
+		{ label: 'Now Playing', value: 'now_playing' },
+		{ label: 'Popular', value: 'popular' },
+		{ label: 'Top Rated', value: 'top_rated' },
+		{ label: 'Upcoming', value: 'upcoming' },
+	];
 
-    constructor(private router: Router) {}
+	selectedCategory: MovieCategory | null = null;
 
-    selectedCategory: MovieCategory = 'now_playing';
+	constructor(private router: Router) {}
 
-    select(category: MovieCategory) {
-      if (category !== this.selectedCategory) {
-        this.selectedCategory = category;
-        this.router.navigate([category]);
-      }
-    }
+	ngOnInit() {
+		this.router.events
+		.pipe(filter(event => event instanceof NavigationEnd))
+		.subscribe(() => {
+			this.updateActiveFromUrl();
+		});
+		this.updateActiveFromUrl();
+	}
+	select(category: MovieCategory) {
+		this.router.navigate([category]);
+	}
+	private updateActiveFromUrl() {
+		const tree = this.router.parseUrl(this.router.url);
+		const primarySegments: UrlSegment[] = tree.root.children['primary']?.segments ?? [];
+		const firstSegment = primarySegments.length > 0
+		? primarySegments[0].path
+		: '';
+		const match = this.categories.find(c => c.value === firstSegment);
+		this.selectedCategory = match ? match.value : null;
+	}
 }

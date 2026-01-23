@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-.app-container {
-  @apply max-w-7xl mx-auto px-6;
+@import "primeicons/primeicons.css";
+
+:host ::ng-deep .p-menubar {
+  height: 70px;
+  width: 100%;
+}
+
+:host ::ng-deep .p-menubar-start,
+:host ::ng-deep .p-menubar-end {
+  display: flex;
+  align-items: center;
 }

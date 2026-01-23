@@ -19,14 +19,10 @@ export class HomePageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private homeState: HomeStateService, private router: Router) {}
 
   ngOnInit() {
-      this.route.paramMap.subscribe(params => {
-        const categoryParam = params.get('category') as MovieCategory;
-        if (categoryParam) {
-          this.selectedCategory = categoryParam;
-          this.homeState.category = categoryParam;
-        } else {
-          this.router.navigate(['now_playing']);
-        }
-      });
-  }
+  this.route.paramMap.subscribe(params => {
+    const categoryParam = params.get('category') as MovieCategory;
+    this.selectedCategory = categoryParam ?? 'now_playing';
+    this.homeState.category = this.selectedCategory;
+  });
+}
 }
