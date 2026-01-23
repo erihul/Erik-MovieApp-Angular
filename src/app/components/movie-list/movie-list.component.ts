@@ -68,19 +68,20 @@ export class MovieListComponent {
       .getMoviesFromApi(this._category, this.currentPage)
       .subscribe({
         next: movies => {
-          const updated = [...this.moviesArray(), ...movies];
+			const updated = [...this.moviesArray(), ...movies];
+			this.moviesArray.set(updated);
 
-          this.moviesArray.set(updated);
+			this.homeState.movies = updated;
+			this.homeState.currentPage = this.currentPage + 1;
+			this.currentPage++;
 
-          this.homeState.movies = updated;
-          this.homeState.currentPage = this.currentPage + 1;
-
-          this.currentPage++;
-          this.isLoading = false;
+			queueMicrotask(() => {
+					this.isLoading = false;
+			});
         },
-        error: err => {
-          console.error(err);
-          this.isLoading = false;
+			error: err => {
+			console.error(err);
+			this.isLoading = false;
         }
       });
   }

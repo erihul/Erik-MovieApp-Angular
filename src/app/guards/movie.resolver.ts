@@ -16,17 +16,3 @@ export class MovieResolver implements Resolve<any> {
         return {data: "String"};
     }
 }
-
-/* @Injectable({
-  providedIn: 'root'
-})
-export class MovieListResolver implements Resolve<Movie> {
-    constructor(private http: HttpClient) { }
-
-    resolve(route: ActivatedRouteSnapshot): Movie {
-        const id = route.paramMap.get("id");
-        console.log("Movie List Resolver(id): " + id);
-
-        return this.http.get<Movie>(`/movie/${id}`);
-    }
-} */

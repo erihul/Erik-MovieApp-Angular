@@ -20,7 +20,6 @@ export class MovieDetailPageComponent implements OnInit {
   isLoading = signal(false);
   error = signal<string | null>(null);
   genresString = signal<string>('');
-  trailerKey = signal<string | null>(null);
   trailerUrl = signal<SafeResourceUrl | null>(null);
 
   constructor(
