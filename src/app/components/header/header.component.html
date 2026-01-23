@@ -5,7 +5,7 @@
          [ngClass]="{ 'backdrop-blur bg-gray-700/50 shadow-lg': isScrolled }">
   <nav class="app-container flex items-center justify-between transition-all duration-900"
       style="height: var(--header-height);">
-      <a routerLink="/"
+      <a [routerLink]="['/now_playing']"
         class="flex items-center gap-1 text-white cursor-pointer select-none group
               transition-transform duration-300"
           [class.scale-95]="isScrolled">

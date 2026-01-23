@@ -15,7 +15,7 @@ type MovieCategory = 'now_playing' | 'popular' | 'top_rated' | 'upcoming';
 })
 export class MovieListComponent {
 
-  private _category: MovieCategory = 'popular';
+  private _category!: MovieCategory;
 
   currentPage = 1;
   isLoading = false;
@@ -39,23 +39,24 @@ export class MovieListComponent {
     private userMovies: UserMoviesService,
     private homeState: HomeStateService
   ) {
-    this.moviesArray.set(this.homeState.movies);
     this.currentPage = this.homeState.currentPage;
     this._category = this.homeState.category;
-      if (this.homeState.movies.length === 0) {
+    if (this.homeState.movies.length > 0) {
+      this.moviesArray.set(this.homeState.movies);
+    } else {      
       this.loadMovies();
     }
   }
 
   private resetAndLoad() {
-    this.currentPage = 1;
-    this.moviesArray.set([]);
+      this.homeState.category = this._category;
+      this.homeState.movies = [];
+      this.homeState.currentPage = 1;
 
-    this.homeState.movies = [];
-    this.homeState.currentPage = 1;
-    this.homeState.category = this._category;
+      this.currentPage = 1;
+      this.moviesArray.set([]);
 
-    this.loadMovies();
+      this.loadMovies();
   }
 
   loadMovies() {

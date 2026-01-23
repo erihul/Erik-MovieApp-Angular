@@ -1,4 +1,12 @@
-<app-header></app-header>
-<main class="app-container py-6">
-    <router-outlet></router-outlet>
+<header>
+    <router-outlet name="header"></router-outlet>
+</header>
+<main class="flex">
+    <aside class="w-64">
+        <router-outlet name="sidebar"></router-outlet>
+    </aside>
+
+    <section class="flex-1 p-8">
+        <router-outlet></router-outlet>
+    </section>
 </main>
