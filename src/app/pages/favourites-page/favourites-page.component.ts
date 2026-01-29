@@ -1,16 +1,26 @@
-import { Component, Signal } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { UserMoviesService } from '../../services/user-movies.service';
 import { SavedMovieItem } from '../../model/movie.type';
 import { RouterModule } from '@angular/router';
+import { UserMovieListComponent } from '../../components/user-movie-list/user-movie-list.component';
 
 @Component({
   selector: 'app-favourites',
-  imports: [ RouterModule ],
+  imports: [ RouterModule, UserMovieListComponent ],
   templateUrl: './favourites-page.component.html',
   styleUrl: './favourites-page.component.scss',
 })
 export class FavouritesPageComponent {
-  favourites!: Signal<SavedMovieItem[]>;
+
+	private userMovies = inject(UserMoviesService);
+
+  	favourites = this.userMovies.favourites;
+
+	remove(id: number) {
+		this.userMovies.removeFromFavourites(id);
+	}
+
+  /* favourites!: Signal<SavedMovieItem[]>;
   hoveringX: number | null = null;
 
   constructor(private userMovies: UserMoviesService) {
@@ -19,6 +29,6 @@ export class FavouritesPageComponent {
 
   remove(movieId: number) {
     this.userMovies.removeFromFavourites(movieId);
-  }
+  } */
 
 }

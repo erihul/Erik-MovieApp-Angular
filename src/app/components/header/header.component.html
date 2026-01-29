@@ -6,7 +6,7 @@
 	[ngClass]="{ '!backdrop-blur !bg-gray-700/50 !shadow-lg': isScrolled }">
 	
 	<ng-template pTemplate="start">
-		<div class="w-full max-w-screen-2xl mx-auto px-32 flex items-center">
+		<div class="w-full max-w-screen-2xl mx-auto px-28 flex items-center">
 		<a [routerLink]="['/now_playing']"
 			class="flex items-center gap-1 text-white cursor-pointer select-none group transition-transform duration-300"
 			[class.scale-95]="isScrolled">
@@ -22,7 +22,7 @@
 		</div>
 	</ng-template>
 	<ng-template pTemplate="end">
-		<div class="w-full max-w-screen-2xl mx-auto px-32 flex items-center justify-end gap-5">
+		<div class="w-full max-w-screen-2xl mx-auto px-20 flex items-center justify-end gap-6">
 			<p-button (click)="op.toggle($event)" icon="pi pi-search" label="Search"
 				styleClass="!bg-transparent !border-none [&_.p-button-label]:text-gray-400 [&_.p-button-icon]:text-gray-400
     				[&:hover_.p-button-label]:text-white [&:hover_.p-button-icon]:text-white transition-colors"/>

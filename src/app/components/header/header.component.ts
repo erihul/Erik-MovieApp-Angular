@@ -37,7 +37,7 @@ export class HeaderComponent {
 		const query = this.searchControl.value;
 
 		this.messageService.add({
-			severity: 'contrast	',
+			severity: 'contrast',
 			summary: 'Your search:',
 			detail: `${query}`,
 			life: 3000,
