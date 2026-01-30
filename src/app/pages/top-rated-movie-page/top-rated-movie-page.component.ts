@@ -3,7 +3,7 @@ import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../model/movie.model';
 import { CommonModule } from '@angular/common';
 import { MovieListComponent } from '../../components/movie-list/movie-list.component';
-import { BehaviorSubject, Observable, scan, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-top-rated-movie-page',

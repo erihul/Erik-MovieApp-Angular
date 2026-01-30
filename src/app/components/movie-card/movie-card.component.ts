@@ -13,36 +13,31 @@ import { MovieActionButtonComponent } from '../movie-action-button/movie-action-
   styleUrl: './movie-card.component.scss',
 })
 export class MovieCardComponent {
-  @Input({ required: true }) movie!: Movie;
+	@Input({ required: true }) movie!: Movie;
 
-  @Output() addToFavourites = new EventEmitter<Movie>();
-  @Output() addToWatchList = new EventEmitter<Movie>();
+	@Output() addToFavourites = new EventEmitter<Movie>();
+	@Output() addToWatchList = new EventEmitter<Movie>();
 
-  constructor(private userMovies: UserMoviesService) {}
+	constructor(private userMovies: UserMoviesService) {}
 
-  // Check if movie is in favourites/watchlist
-  isFavourite() {
-    return this.userMovies.favourites().some(m => m.id === this.movie.id);
-  }
-
-  isInWatchlist() {
-    return this.userMovies.watchList().some(m => m.id === this.movie.id);
-  }
-
-  // Toggle favourite/watchlist
-  toggleFavourite() {
-    if (this.isFavourite()) {
-      this.userMovies.removeFromFavourites(this.movie.id);
-    } else {
-      this.userMovies.addToFavourites(this.movie);
-    }
-  }
-
-  toggleWatchlist() {
-    if (this.isInWatchlist()) {
-      this.userMovies.removeFromWatchList(this.movie.id);
-    } else {
-      this.userMovies.addToWatchList(this.movie);
-    }
-  }
+	isFavourite() {
+		return this.userMovies.favourites().some(m => m.id === this.movie.id);
+	}
+	isInWatchlist() {
+		return this.userMovies.watchList().some(m => m.id === this.movie.id);
+	}
+	toggleFavourite() {
+		if (this.isFavourite()) {
+		this.userMovies.removeFromFavourites(this.movie.id);
+		} else {
+		this.userMovies.addToFavourites(this.movie);
+		}
+	}
+	toggleWatchlist() {
+		if (this.isInWatchlist()) {
+		this.userMovies.removeFromWatchList(this.movie.id);
+		} else {
+		this.userMovies.addToWatchList(this.movie);
+		}
+	}
 }

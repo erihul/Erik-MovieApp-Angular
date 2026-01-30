@@ -23,28 +23,22 @@ export class UserMovieListComponent {
 	@Input() icon: 'heart' | 'bookmark' | 'star' = 'heart';
 	@Input() colorClass = 'text-red-500';
 
-	// Movies signal
 	@Input({ required: true }) movies!: Signal<Movie[]>;
 	@Input() emptyText = 'No movies yet.';
 
-	// Events
 	@Output() remove = new EventEmitter<number>();
 
-	// Local hover
 	hoveringX: number | null = null;
 
-	// Local credits cache
 	creditsMap = signal<Record<number, CreditsViewModel>>({});
 
 	ngOnInit() {
-		// Optionally preload credits for all movies
 		this.movies().forEach(movie => {
 		this.loadCredits(movie.id);
 		});
 	}
 
 	loadCredits(movieId: number) {
-		// Already loaded?
 		if (this.creditsMap()[movieId]) return;
 
 		this.movieService.getMovieCredits(movieId).subscribe(({ director, actors }) => {
@@ -63,22 +57,3 @@ export class UserMovieListComponent {
 		this.remove.emit(movieId);
 	}
 }
-/* export class UserMovieListComponent {
-	@Input({ required: true }) title!: string;
-	@Input() icon: 'heart' | 'bookmark' | 'star' = 'heart';
-	@Input() colorClass = 'text-red-500';
-
-	// Data
-	@Input({ required: true }) movies!: Signal<SavedMovieItem[]>;
-	@Input() emptyText = 'No movies yet.';
-
-	// Events
-	@Output() remove = new EventEmitter<number>();
-
-	hoveringX: number | null = null;
-
-	onRemove(movieId: number, event: Event) {
-		event.stopPropagation();
-		this.remove.emit(movieId);
-	}
-} */

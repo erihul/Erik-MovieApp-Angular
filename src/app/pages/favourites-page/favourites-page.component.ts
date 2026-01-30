@@ -18,16 +18,4 @@ export class FavouritesPageComponent {
 	remove(id: number) {
 		this.userMovies.removeFromFavourites(id);
 	}
-
-  /* favourites!: Signal<SavedMovieItem[]>;
-  hoveringX: number | null = null;
-
-  constructor(private userMovies: UserMoviesService) {
-    this.favourites = this.userMovies.favourites;
-  }
-
-  remove(movieId: number) {
-    this.userMovies.removeFromFavourites(movieId);
-  } */
-
 }

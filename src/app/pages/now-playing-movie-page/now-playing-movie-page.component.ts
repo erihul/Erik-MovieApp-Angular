@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MovieListComponent } from '../../components/movie-list/movie-list.component';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { BehaviorSubject, Observable, scan, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-now-playing-movie-page',
@@ -15,45 +15,45 @@ import { BehaviorSubject, Observable, scan, Subject, switchMap, takeUntil, tap }
   styleUrl: './now-playing-movie-page.component.scss',
 })
 export class NowPlayingMoviePageComponent implements OnInit, OnDestroy {
-  movies: Movie[] = [];
-  currentPage = 1;
-  isLoading = false;
-  
-  private destroy$ = new Subject<void>();
+	movies: Movie[] = [];
+	currentPage = 1;
+	isLoading = false;
+	
+	private destroy$ = new Subject<void>();
 
-  constructor(
-    private movieService: MovieService,
-    private cdr: ChangeDetectorRef
-  ) {}
+	constructor(
+		private movieService: MovieService,
+		private cdr: ChangeDetectorRef
+	) {}
 
-  ngOnInit() {
-    this.loadMovies();
-  }
+	ngOnInit() {
+		this.loadMovies();
+	}
 
-  loadMovies() {
-    if (this.isLoading) return;
-    
-    this.isLoading = true;
-    
-    this.movieService.getMovies('upcoming', this.currentPage)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: movies => {
-          this.movies = [...this.movies, ...movies];
-          this.currentPage++;
-          this.isLoading = false;
-          this.cdr.detectChanges();
-        },
-        error: err => {
-          console.error('Failed to load movies', err);
-          this.isLoading = false;
-          this.cdr.detectChanges();
-        }
-      });
-  }
+	loadMovies() {
+		if (this.isLoading) return;
+		
+		this.isLoading = true;
+		
+		this.movieService.getMovies('upcoming', this.currentPage)
+		.pipe(takeUntil(this.destroy$))
+		.subscribe({
+			next: movies => {
+				this.movies = [...this.movies, ...movies];
+				this.currentPage++;
+				this.isLoading = false;
+				this.cdr.detectChanges();
+			},
+			error: err => {
+				console.error('Failed to load movies', err);
+				this.isLoading = false;
+				this.cdr.detectChanges();
+			}
+		});
+	}
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+	ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
+	}
 }

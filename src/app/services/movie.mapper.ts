@@ -1,4 +1,3 @@
-// /src/app/services/movie.mapper.ts
 import {
   ApiMovie,
   ApiMovieListResponse,
@@ -18,7 +17,6 @@ import type {
   Review,
   MovieImages,
 } from '../model/movie.model';
-
 export class MovieMapper {
   static toMovie(api: ApiMovie, imageBaseUrl: string): Movie {
     return {
@@ -34,13 +32,9 @@ export class MovieMapper {
       popularity: api.popularity,
     };
   }
-
-  // Maps list of movies
   static toMoviesList(response: ApiMovieListResponse, imageBaseUrl: string): Movie[] {
     return response.results.map(movie => this.toMovie(movie, imageBaseUrl));
   }
-
-  // Maps detailed movie info (full detail page)
   static toMovieDetails(
     api: ApiMovieDetails,
     imageBaseUrl: string,
@@ -106,8 +100,6 @@ export class MovieMapper {
       reviews: domainReviews,
     };
   }
-
-  // Maps an actor
   static toActor(api: any, imageBaseUrl: string): Actor {
     return {
       id: api.id,
@@ -116,8 +108,6 @@ export class MovieMapper {
       profileUrl: api.profile_path ? `${imageBaseUrl}/w300${api.profile_path}` : undefined,
     };
   }
-
-  // Maps a generic person (e.g., director)
   static toPerson(api: any): Person {
     return {
       id: api.id,

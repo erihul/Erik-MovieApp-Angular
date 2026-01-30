@@ -17,11 +17,10 @@ export class MovieResolver implements Resolve<MovieDetails | null> {
       console.error('No movie ID found in route');
       return of(null);
     }
-
     return this.movieService.getFullMovieDetails(id).pipe(
       catchError(err => {
         console.error('Failed to load movie details for ID:', id, err);
-        return of(null); // fallback: null if failed
+        return of(null);
       })
     );
   }

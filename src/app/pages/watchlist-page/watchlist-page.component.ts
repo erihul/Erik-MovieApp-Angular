@@ -17,15 +17,4 @@ export class WatchlistPageComponent {
 	remove(id: number) {
 		this.userMovies.removeFromWatchList(id);
 	}
-
-  /* watchList!: Signal<SavedMovieItem[]>;
-  hoveringX: number | null = null;
-  
-  constructor(private userMovies: UserMoviesService) {
-    this.watchList = this.userMovies.watchList;
-  }
-
-  remove(movieId: number) {
-    this.userMovies.removeFromWatchList(movieId);
-  } */
 }
