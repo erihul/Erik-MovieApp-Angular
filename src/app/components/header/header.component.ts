@@ -62,13 +62,6 @@ export class HeaderComponent {
 				this.isLoggedIn = true;
 			}
 		})
-		/* this.ref?.onClose.subscribe((loggedIn?: boolean) => {
-			if (loggedIn === true){
-				setTimeout(() => {
-					console.log('Logging in...');
-				});
-			}	
-		}); */
 		// TODO: Move this later
 		//this.isLoggedIn = true;
 	}

@@ -31,35 +31,35 @@
 @if (movies().length > 0) {
   <div class="mt-6 divide-y divide-neutral-800 bg-neutral-800/60">
     @for (movie of movies(); track movie.id) {
-      <div class="flex items-start justify-between gap-4 py-5 px-3 transition" (mouseenter)="loadCredits(movie.id)">
+      <div class="flex items-center justify-between gap-4 py-2 px-3 transition" (mouseenter)="loadCredits(movie.id)">
 
         <!-- Poster -->
         <img
           [routerLink]="['/movie', movie.id]"
-          class="w-[72px] h-[108px] object-cover rounded shadow cursor-pointer transition hover:shadow-lg hover:brightness-[0.94]"
+          class="[72px] h-[125px] object-cover rounded shadow cursor-pointer transition hover:shadow-lg hover:brightness-[0.94]"
           [src]="movie.posterUrl"
           [alt]="movie.title"
         />
 
         <!-- Info -->
         <div class="flex-1 min-w-0 pt-1">
-          <p [routerLink]="['/movie', movie.id]" class="text-lg font-semibold truncate cursor-pointer hover:text-zinc-300 transition">
-            {{ movie.title }} ({{ movie.year }})
-          </p>
-          <p class="text-sm text-gray-400">
-            Rating: {{ movie.rating }}
-          </p>
-          <p class="text-sm text-gray-400 truncate">
-            {{ movie.description }}
-          </p>
+			<p [routerLink]="['/movie', movie.id]" class="mb-1 text-lg font-semibold truncate cursor-pointer hover:text-zinc-200 transition">
+				{{ movie.title }} ({{ movie.year }})
+			</p>
+			<p class="mb-1 text-sm text-zinc-300">
+				Rating: {{ movie.rating }}
+			</p>
+			<p class="mb-1 text-sm text-zinc-100">
+				{{ movie.description }}
+			</p>
 
-          <!-- Lazy-loaded credits -->
-          <p class="text-sm text-gray-400 mt-0.5" *ngIf="creditsMap()[movie.id]?.director">
-            Director: {{ creditsMap()[movie.id].director }}
-          </p>
-          <p class="text-sm text-gray-400 mt-0.5" *ngIf="creditsMap()[movie.id]?.actors">
-            Stars: {{ creditsMap()[movie.id].actors }}
-          </p>
+			<!-- Lazy-loaded credits -->
+			<p class="text-sm text-zinc-300 mt-0.5" *ngIf="creditsMap()[movie.id]?.director">
+				<strong>Director: </strong>{{ creditsMap()[movie.id].director }}
+			</p>
+			<p class="text-sm text-zinc-300 mt-0.5" *ngIf="creditsMap()[movie.id]?.actors">
+				<strong>Stars: </strong>Stars: {{ creditsMap()[movie.id].actors }}
+			</p>
         </div>
 
         <!-- Remove button -->

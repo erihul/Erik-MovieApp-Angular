@@ -1,7 +1,5 @@
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Movie } from '../../model/movie.model';
-import { MovieService } from '../../services/movie.service';
-import { DurationPipe } from '../../pipes/duration-pipe';
 import { RouterModule } from '@angular/router';
 import { UserMoviesService } from '../../services/user-movies.service';
 import { CommonModule } from '@angular/common';

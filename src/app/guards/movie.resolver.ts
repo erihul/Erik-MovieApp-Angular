@@ -26,15 +26,3 @@ export class MovieResolver implements Resolve<MovieDetails | null> {
     );
   }
 }
-
-/* export class MovieResolver implements Resolve<any> {
-    constructor(private http: HttpClient) { }
-
-    resolve(route: ActivatedRouteSnapshot): any {
-        const id = route.paramMap.get("id");
-        console.log("Movie Resolver(id): " + id);
-        
-
-        return {data: "String"};
-    }
-} */
