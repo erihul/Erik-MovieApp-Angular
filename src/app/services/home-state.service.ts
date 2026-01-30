@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Movie } from "../model/movie.type";
+import { Movie } from "../model/movie.model";
 
 export type MovieCategory =
   | 'now_playing'

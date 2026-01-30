@@ -1,4 +1,138 @@
 <section
+  *ngIf="movie() as movie"
+  class="relative w-full h-[88vh] bg-cover bg-center"
+  [style.backgroundImage]="'url(' + movie.backdropUrl + ')'"
+>
+  <div class="absolute inset-0 bg-black/60">
+    <h1 class="text-6xl text-zinc-300 font-bold mb-2 p-8">
+      {{ movie.title }}
+    </h1>
+  </div>
+
+  <div
+    class="relative z-10 h-full flex items-end justify-between pb-8 max-w-screen-2xl mx-auto px-10 w-full"
+  >
+    <div class="text-white max-w-3xl">
+      <div class="mt-3 text-lg text-gray-300">
+        {{ movie.genres?.join(', ') }}
+      </div>
+
+      <div class="flex items-center gap-3 text-base font-semibold text-gray-200">
+        <span *ngIf="movie.year">{{ movie.year }}</span>
+        <span *ngIf="movie.year && (movie.runtime || movie.rating)">•</span>
+        <span *ngIf="movie.runtime">{{ movie.runtime }} min</span>
+        <span *ngIf="movie.runtime && movie.rating">•</span>
+
+        <span *ngIf="movie.rating" class="flex items-center gap-1 text-yellow-400">
+          ⭐ {{ movie.rating | number:'1.1-1' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-4 items-end">
+      <app-movie-action-button
+        label="Favourite"
+        [active]="isFavourite()"
+        (clicked)="toggleFavourite()"
+      ></app-movie-action-button>
+
+      <app-movie-action-button
+        label="Watchlist"
+        [active]="isInWatchlist()"
+        (clicked)="toggleWatchlist()"
+      ></app-movie-action-button>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="movie() as movie" class="container mx-auto px-4 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div>
+      <img
+        class="rounded-lg shadow-lg w-full"
+        [src]="movie.posterUrl"
+        [alt]="movie.title"
+      />
+    </div>
+
+    <div class="md:col-span-3 space-y-4">
+      <div>
+        <h2 class="text-2xl font-bold mb-2">Overview</h2>
+        <p class="leading-relaxed font-serif">
+          {{ movie.description }}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <p *ngIf="movie.budget">
+          <strong>Budget:</strong>
+          {{ movie.budget | currency:'USD' }}
+        </p>
+
+        <a
+          *ngIf="movie.homepage"
+          [href]="movie.homepage"
+          target="_blank"
+          class="text-indigo-600 text-xl hover:underline"
+        >
+          Official website
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="trailerUrl()" class="container mx-auto px-4 pb-12">
+  <h2 class="text-3xl font-semibold mb-4">Trailer</h2>
+  <div class="aspect-video">
+    <iframe
+      class="w-full h-full rounded"
+      [src]="trailerUrl()"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>
+
+<section *ngIf="movie() as movie" class="container mx-auto px-4 pb-12 space-y-12">
+
+  <!-- Production -->
+  <section *ngIf="movie.productionCompanies?.length">
+    <h3 class="text-2xl font-semibold mb-2">Production Companies</h3>
+    <ul class="list-disc pl-6">
+      <li *ngFor="let c of movie.productionCompanies">
+        {{ c.name }} <span *ngIf="c.originCountry">({{ c.originCountry }})</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Cast -->
+  <section *ngIf="movie.actors?.length">
+    <h3 class="text-2xl font-semibold mb-4">Top Cast</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
+      <div *ngFor="let a of movie.actors">
+        <img *ngIf="a.profileUrl" [src]="a.profileUrl" class="rounded mb-2" />
+        <p class="font-semibold">{{ a.name }}</p>
+        <p class="text-sm text-gray-500">{{ a.character }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section *ngIf="movie.reviews?.length">
+    <h3 class="text-2xl font-semibold mb-4">Reviews</h3>
+    <article *ngFor="let r of movie.reviews" class="mb-6">
+      <p class="font-semibold">{{ r.author }}</p>
+      <p class="text-sm text-gray-600">{{ r.createdAt | date }}</p>
+      <p>{{ r.content }}</p>
+    </article>
+  </section>
+
+</section>
+
+
+
+<!-- <section
 	*ngIf="movieDetail() as movie"
 	class="relative w-full h-[88vh] bg-cover bg-center"
 	[style.backgroundImage]="'url(' + movie.backdrop + ')'">
@@ -103,5 +237,5 @@
 		allowfullscreen
 		></iframe>
 	</div>
-</section>
+</section> -->
 

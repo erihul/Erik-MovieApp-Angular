@@ -1,6 +1,5 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UserMoviesService } from '../../services/user-movies.service';
-import { SavedMovieItem } from '../../model/movie.type';
 import { RouterModule } from '@angular/router';
 import { UserMovieListComponent } from "../../components/user-movie-list/user-movie-list.component";
 

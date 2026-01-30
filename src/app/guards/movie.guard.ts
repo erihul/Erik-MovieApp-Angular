@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Resolve } from '@angular/router';
-import { Movie } from '../model/movie.type';
-import { HttpClient } from '@angular/common/http';
+import { CanActivate } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class MovieGuard implements CanActivate {

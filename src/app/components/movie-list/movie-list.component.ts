@@ -1,9 +1,6 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MovieCardComponent } from "../movie-card/movie-card.component";
-import { MovieService } from '../../services/movie.service';
-import { Movie } from '../../model/movie.type';
-import { UserMoviesService } from '../../services/user-movies.service';
-import { HomeStateService } from '../../services/home-state.service';
+import { Movie } from '../../model/movie.model';
 
 type MovieCategory = 'now_playing' | 'popular' | 'top_rated' | 'upcoming';
 @Component({
@@ -13,7 +10,17 @@ type MovieCategory = 'now_playing' | 'popular' | 'top_rated' | 'upcoming';
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss',
 })
-export class MovieListComponent {
+export class MovieListComponent {	
+	@Input({ required: true }) movies: Movie[] = [];
+	@Input() isLoading = false;
+
+	@Output() loadMore = new EventEmitter<void>();
+	@Output() addToFavourites = new EventEmitter<Movie>();
+	@Output() addToWatchList = new EventEmitter<Movie>();
+}
+
+
+/* export class MovieListComponent {
 
   private _category!: MovieCategory;
 
@@ -94,3 +101,4 @@ export class MovieListComponent {
     this.userMovies.addToWatchList(movie);
   }
 }
+ */

@@ -1,4 +1,26 @@
 <section class="grid gap-6 grid-cols-1 sm:grid-cols-2">
+	@for (movie of movies; track movie.id) {
+		<app-movie-card
+		[movie]="movie"
+		(addToFavourites)="addToFavourites.emit($event)"
+		(addToWatchList)="addToWatchList.emit($event)">
+		</app-movie-card>
+	}
+</section>
+
+<div class="flex justify-center mt-8">
+	<button
+		(click)="loadMore.emit()"
+		[disabled]="isLoading"
+		class="px-6 py-2 rounded-lg font-semibold transition
+			bg-gray-800 text-gray-200
+			hover:bg-red-800 hover:text-white
+			disabled:opacity-50">
+		{{ isLoading ? 'Loading…' : 'Load more' }}
+	</button>
+</div>
+
+<!-- <section class="grid gap-6 grid-cols-1 sm:grid-cols-2">
   @for (movie of moviesArray(); track movie.id) {
     <app-movie-card
       [movie]="movie"
@@ -19,3 +41,4 @@
     {{ isLoading ? 'Loading…' : 'Load more' }}
   </button>
 </div>
+ -->
